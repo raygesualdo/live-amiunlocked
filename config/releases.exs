@@ -2,4 +2,5 @@ import Config
 
 config :amiunlocked, AmiunlockedWeb.Endpoint,
   server: true,
-  url: [host: System.get_env("APP_NAME") <> ".gigalixirapp.com", port: 443]
+  url: [host: nil, port: 443],
+  force_ssl: [rewrite_on: [:x_forwarded_proto]]
