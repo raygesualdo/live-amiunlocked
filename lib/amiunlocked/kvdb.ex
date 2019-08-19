@@ -1,5 +1,6 @@
 defmodule Amiunlocked.KVDB do
   alias Amiunlocked.State
+  require Logger
 
   @spec read :: {:error, String.t()} | {:ok, String.t()}
   def read() do
@@ -10,11 +11,11 @@ defmodule Amiunlocked.KVDB do
         {:ok, state}
 
       {:ok, %HTTPoison.Response{body: body} = response} ->
-        IO.inspect(response)
+        Logger.error(response)
         {:error, body}
 
       {:error, %HTTPoison.Error{reason: reason}} ->
-        IO.inspect(reason)
+        Logger.error(reason)
         {:error, reason}
     end
   end
@@ -29,11 +30,11 @@ defmodule Amiunlocked.KVDB do
         {:ok, %{}}
 
       {:ok, %HTTPoison.Response{body: body} = response} ->
-        IO.inspect(response)
+        Logger.error(response)
         {:error, body}
 
       {:error, %HTTPoison.Error{reason: reason}} ->
-        IO.inspect(reason)
+        Logger.error(reason)
         {:error, reason}
     end
   end
