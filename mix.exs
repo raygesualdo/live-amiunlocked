@@ -19,7 +19,7 @@ defmodule Amiunlocked.MixProject do
   def application do
     [
       mod: {Amiunlocked.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :timex]
     ]
   end
 
@@ -40,7 +40,9 @@ defmodule Amiunlocked.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:httpoison, "~> 1.5"},
-      {:basic_auth, "~> 2.2.2"}
+      {:basic_auth, "~> 2.2.2"},
+      {:phoenix_live_view, github: "phoenixframework/phoenix_live_view"},
+      {:timex, "~> 3.5"}
     ]
   end
 end
