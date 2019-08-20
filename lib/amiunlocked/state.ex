@@ -14,6 +14,12 @@ defmodule Amiunlocked.State do
   @spec write(Amiunlocked.State.t()) :: :ok
   def write(payload), do: GenServer.cast(__MODULE__, {:write, payload})
 
+  @topic inspect(__MODULE__)
+
+  def subscribe() do
+    Phoenix.PubSub.subscribe(Amiunlocked.PubSub, @topic)
+  end
+
   # Implementation
 
   def start_link(opts) do
@@ -31,6 +37,7 @@ defmodule Amiunlocked.State do
   end
 
   def handle_cast({:write, %State{} = state}, _val) do
+    Phoenix.PubSub.broadcast(Amiunlocked.PubSub, @topic, {__MODULE__, state})
     {:noreply, state}
   end
 end

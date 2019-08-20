@@ -12,8 +12,7 @@ defmodule AmiunlockedWeb.PageController do
     state = %State{state: state, updatedAt: updatedAt}
 
     with {:ok, _} <- KVDB.write(state),
-         :ok <- State.write(state),
-         :ok <- AmiunlockedWeb.Endpoint.broadcast!("state", "state_change", state) do
+         :ok <- State.write(state) do
       render(conn, "success.json")
     end
   end
